@@ -1,0 +1,80 @@
+.row {
+    
+    /* like bootstrap 12-col div
+        1. define col4 and col8 (to represent a 4:8 or 2parts columns)
+        2. col4 will have 100% width / 12 * 4 = 33.33%
+        3. col8 will have 100% width / 12 * 8 = 66.66%
+        4. float them all to the left (like stacking) and also so that
+            for mobile-first, the columns will move down and occupy
+            the left side of the screen
+        5. add the clearfix: the idea is that instead of adding an empty
+            div and then apply clear: both, the pseudo class ::after
+            was used (mimics as if we have an empty div thats why
+            content: "") and apply same settings
+        4. assign a class of --gutters if you want to add gap between the columns
+            set padding (within the box) to the right, applicable to all 
+            columns or both columns, and preserving the overall total of 100% 
+            by using box-sizing so as not to move the othr columns below
+        5. if the padding of the rightmost column is unwanted, do trick
+            below to hide it or somehow reclaim it
+            a. set the overall div that contains this 2 columns to have 
+                margin on the right set to (-) value of the added right 
+                padding for each columns. this will move an extra (+) value
+                margin to the right
+            note: use aqua bg on the wrapper div and violet bg on 
+                the row div to distinguish these areas
+            b. now, need to hide the violet area that is out of scope
+                of the overall wrapper or the higher div than the
+                row div (which is the wrapper div)
+        6. ok, so now that the desktop layout is fixed, we want the 
+            mobile layout to just stack vertically, which means that
+            floating columns (or many columns in a row) will only 
+            take effect when the device is at medium width,
+            otherwise, the div will be stacked vertically by default
+    */
+    
+    @mixin clearfix;
+    
+    &--gutters {
+        margin-right: -65px; 
+        /* to offset the extra padding on the rightmost
+            used with overflow: hidden of the wrapper div
+        */
+    }
+    
+    &--gutters > div {
+        padding-right: 65px;
+        /* 4col of 33% and 8col of 66% + 65px*2 of padding will be more than 100%
+            thus box-sizing is needed here (which is later moved to global1`)
+            to preserve the 100% total width
+        */
+    }
+    
+    &__b-margin-until-medium {
+        padding-bottom: 1rem;
+    }
+    
+    @mixin atMedium {
+        &__medium-4 {
+            float: left;
+            width: 33.33%; /* this will be re-used so this can be overriden as shown below */
+        }
+        
+        &__medium-4--larger {
+            width: 37%;
+        }
+
+        &__medium-8 {
+            float: left;
+            width: 66.66%;
+        }
+        
+        &__medium-8--smaller {
+            width: 63%;
+        }
+        
+        &__b-margin-until-medium {
+            padding-bottom: 0;
+        }
+    }
+}
