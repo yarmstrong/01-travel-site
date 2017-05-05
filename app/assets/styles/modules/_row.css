@@ -42,12 +42,32 @@
         */
     }
     
+    &--gutters-large {
+        margin-right: -100px;
+    }
+    
+    &--gutters-small {
+        margin-right: -45px;
+    }
+    
     &--gutters > div {
         padding-right: 65px;
         /* 4col of 33% and 8col of 66% + 65px*2 of padding will be more than 100%
             thus box-sizing is needed here (which is later moved to global1`)
             to preserve the 100% total width
         */
+    }
+    
+    &--gutters-large > div {
+        padding-right: 100px;
+    }
+    
+    &--gutters-small > div {
+        padding-right: 45px;
+    }
+    
+    &--t-padding {
+        padding-top: 80px;
     }
     
     &__b-margin-until-medium {
@@ -63,6 +83,11 @@
         &__medium-4--larger {
             width: 37%;
         }
+        
+        &__medium-6 {
+            float: left;
+            width: 50%;
+        }
 
         &__medium-8 {
             float: left;
@@ -75,6 +100,17 @@
         
         &__b-margin-until-medium {
             padding-bottom: 0;
+        }
+    }
+    
+    @mixin atLarge {
+        &--equal-height-at-large  {
+            display: flex;
+            
+            & > div {
+                float: none;
+                display: flex;
+            }
         }
     }
 }

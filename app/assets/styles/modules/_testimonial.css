@@ -1,0 +1,43 @@
+.testimonial {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0 18px 1px 18px; 
+    /* 1px was added in padding-bottom just to tell the paragraph's margin to encompass it with background */
+    margin-bottom: 98px;
+    /* to lower the images positioned relative since the 2nd and 3rd will be partly hidden */
+    
+    @mixin atLarge {
+        margin-bottom: 0; /* without this the flex on the last testimonial will not work */
+        padding: 0 1.875rem;
+    }
+    
+    &--last {
+        margin-bottom: 0; /* to remove for mobile */
+    }
+    
+    &__photo {
+        width: 160px;
+        height: 160px;
+        border-radius: 80px;
+        overflow: hidden;
+        position: relative;
+        top: -80px;
+        margin: 0 auto -80px auto;
+        border: 6px solid rgba(255, 255, 255, 0.8);
+    }
+    
+    &__title {
+        color: $mainBlue;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 500;
+        margin: 0;
+    }
+    
+    &__subtitle {
+        color: $mainOrange;
+        text-align: center;
+        margin-top: 0.25rem;
+        font-weight: 400;
+        font-size: 0.94rem;
+    }
+}

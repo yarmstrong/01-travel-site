@@ -1,5 +1,6 @@
 .generic-content-container {
     p {
+        font-weight: 300;
         line-height: 1.65; 
         /* if line-height is 1, then it will have the same size of the font. 
             ie: font-size is 1.126rem (18px), the line-height of 1 will have
@@ -7,7 +8,7 @@
             ie: line-height = 2, then *2 of the font-size.
             note: if no font-size is defined, default is 16px
         */
-        margin: 1.8rem 0;
+        margin: 0 0 1.8rem 0;
         
         @mixin atSmall {
             font-size: 1.125rem;     

@@ -565,6 +565,19 @@ a {
   }
 }
 
+.wrapper--no-padding-until-large {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (min-width: 1200px) {
+
+  .wrapper--no-padding-until-large {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
 .page-section {
     padding: 1.2rem 0;
 }
@@ -576,9 +589,32 @@ a {
   }
 }
 
+.page-section--no-b-padding-until-large {
+  padding-bottom: 0;
+}
+
+@media (min-width: 1200px) {
+
+  .page-section--no-b-padding-until-large {
+    padding-bottom: 4.5rem;
+  }
+}
+
 .page-section--blue {
   background-color: #2f5572;
   color: #fff;
+}
+
+.page-section--testimonials {
+  background-color: #e0e6ef;
+}
+
+@media (min-width: 530px) {
+
+  .page-section--testimonials {
+    background: url('../../assets/images/testimonials-bg.jpg') top center no-repeat;
+    background-size: cover;
+  }
 }
 
 .headline {
@@ -684,11 +720,31 @@ a {
         */
 }
 
+.row--gutters-large {
+  margin-right: -100px;
+}
+
+.row--gutters-small {
+  margin-right: -45px;
+}
+
 .row--gutters > div {
   padding-right: 65px;/* 4col of 33% and 8col of 66% + 65px*2 of padding will be more than 100%
             thus box-sizing is needed here (which is later moved to global1`)
             to preserve the 100% total width
         */
+}
+
+.row--gutters-large > div {
+  padding-right: 100px;
+}
+
+.row--gutters-small > div {
+  padding-right: 45px;
+}
+
+.row--t-padding {
+  padding-top: 80px;
 }
 
 .row__b-margin-until-medium {
@@ -706,6 +762,11 @@ a {
     width: 37%;
   }
 
+  .row__medium-6 {
+    float: left;
+    width: 50%;
+  }
+
   .row__medium-8 {
     float: left;
     width: 66.66%;
@@ -720,14 +781,31 @@ a {
   }
 }
 
+@media (min-width: 1200px) {
+
+  .row--equal-height-at-large {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .row--equal-height-at-large > div {
+    float: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
 .generic-content-container p {
+  font-weight: 300;
   line-height: 1.65;/* if line-height is 1, then it will have the same size of the font. 
             ie: font-size is 1.126rem (18px), the line-height of 1 will have
             height of 18px also. thus there is no gap at all.
             ie: line-height = 2, then *2 of the font-size.
             note: if no font-size is defined, default is 16px
         */
-  margin: 1.8rem 0;
+  margin: 0 0 1.8rem 0;
 }
 
 @media (min-width: 530px) {
@@ -739,4 +817,152 @@ a {
 
 .generic-content-container p a {
   font-weight: 700;
+}
+
+.section-title {
+    font-size: 2.55rem;
+    font-weight: 300;
+    text-align: center;
+}
+
+@media (min-width: 530px) {
+
+  .section-title {
+    font-size: 3.75rem;
+  }
+}
+
+.section-title strong {
+  font-weight: 500;
+}
+
+.section-title--blue {
+  color: #2f5572;
+}
+
+.section-title__icon {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.8rem;
+}
+
+@media (min-width: 530px) {
+
+  .section-title__icon {
+    position: relative;
+    top: 8px;
+    margin-right: .5rem;
+    margin-left: 0;
+    margin-bottom: 0;
+    display: inline-block;
+  }
+}
+
+.feature-item {
+    padding-bottom: 40px;
+}
+
+@media (min-width: 530px) {
+
+  .feature-item {
+    position: relative;
+    padding-left: 94px;
+  }
+}
+
+.feature-item__icon {
+  display: block;
+  margin: 0 auto;
+}
+
+@media (min-width: 530px) {
+
+  .feature-item__icon {
+    position: absolute;
+    left: 0;
+  }
+}
+
+.feature-item__title {
+  font-size: 1.6rem;
+  font-weight: 300;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+@media (min-width: 530px) {
+
+  .feature-item__title {
+    font-size: 1.875rem;
+  }
+}
+
+.testimonial {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 0 18px 1px 18px; 
+    /* 1px was added in padding-bottom just to tell the paragraph's margin to encompass it with background */
+    margin-bottom: 98px;
+}
+
+/* to lower the images positioned relative since the 2nd and 3rd will be partly hidden */
+
+@media (min-width: 1200px) {
+
+  .testimonial {
+    margin-bottom: 0;/* without this the flex on the last testimonial will not work */
+    padding: 0 1.875rem;
+  }
+}
+
+.testimonial--last {
+  margin-bottom: 0;/* to remove for mobile */
+}
+
+.testimonial__photo {
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+  overflow: hidden;
+  position: relative;
+  top: -80px;
+  margin: 0 auto -80px auto;
+  border: 6px solid rgba(255, 255, 255, 0.8);
+}
+
+.testimonial__title {
+  color: #2f5572;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.testimonial__subtitle {
+  color: #d59541;
+  text-align: center;
+  margin-top: 0.25rem;
+  font-weight: 400;
+  font-size: 0.94rem;
+}
+
+.site-footer {
+    text-align: center;
+    background-color: #2f5572;
+    color: #fff;
+    padding: .5rem 0;
+}
+
+.site-footer__text {
+  font-weight: 100;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 800px) {
+
+  .site-footer__text {
+    display: inline;
+    margin-right: 1.4rem;
+    margin-bottom: 0;
+  }
 } 
