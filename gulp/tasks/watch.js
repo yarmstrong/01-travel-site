@@ -40,6 +40,10 @@ gulp.task('watch', function() {
         gulp.start('cssInject');
     });
     
+    watch('./app/assets/scripts/**/*.js', function() {
+        // make browsersync to refresh browser for us, once webpack task completed
+        gulp.start('scriptsReload');
+    });
 });
 
 // tell browserSync to do reload everytime css changes
@@ -49,3 +53,7 @@ gulp.task('cssInject', ['styles'], function() {
     // browserSync.stream() anything we pipe into it is available in the browser
     // note gulp.src has return bec it is an async action
 });
+
+gulp.task('scriptsReload', ['scripts'], function() {
+    browserSync.reload();
+})
