@@ -4,11 +4,12 @@ var gulp = require('gulp'),
     csssvars = require('postcss-simple-vars'),
     nested = require('postcss-nested'),
     cssImport = require('postcss-import'),
-    mixins = require('postcss-mixins');
+    mixins = require('postcss-mixins'),
+    hexrgba = require('postcss-hexrgba');
 
 gulp.task('styles', function() {
     return gulp.src('./app/assets/styles/styles.css')
-        .pipe(postcss([cssImport, mixins, csssvars, nested, autoprefixer]))
+        .pipe(postcss([cssImport, mixins, csssvars, nested, hexrgba, autoprefixer]))
         .on('error', function(errorInfo) {
             /* end things on a positive note even if an error happens
                 ?? this was put before the gulp.dest() since the error

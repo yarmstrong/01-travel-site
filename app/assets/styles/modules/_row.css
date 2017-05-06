@@ -9,8 +9,8 @@
             the left side of the screen
         5. add the clearfix: the idea is that instead of adding an empty
             div and then apply clear: both, the pseudo class ::after
-            was used (mimics as if we have an empty div thats why
-            content: "") and apply same settings
+            was used (mimics as if we have an empty div right after the
+			main row div thats why content: "") and apply same settings
         4. assign a class of --gutters if you want to add gap between the columns
             set padding (within the box) to the right, applicable to all 
             columns or both columns, and preserving the overall total of 100% 

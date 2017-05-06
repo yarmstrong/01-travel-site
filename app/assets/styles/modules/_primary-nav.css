@@ -1,0 +1,37 @@
+.primary-nav {
+    
+    &--pull-right {
+        float: right;
+    }
+    
+    ul {
+        @mixin clearfix;
+        margin: 0;
+        padding: 0;
+    }
+    
+    li {
+        list-style: none;
+        /* display: inline; 
+            if you put li as display inline, you 
+            cant put any padding on its a elements,
+            but li float and a block combi is 
+            possible so use it instead
+        */
+        float: left;
+        /* once you use float here, add clear fix
+            on its parent (ul), so that it will
+            still have a place. in reality, each li
+            will occupy its original usurped place
+        */
+        padding-right: 20px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 300;
+        display: block;
+        padding: 12px 0;
+    }
+}

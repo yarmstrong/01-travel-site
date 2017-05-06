@@ -462,6 +462,20 @@ a {
           transform: translateY(-50%);
   width: 100%;
   text-align: center;
+  padding-top: 88px;
+}
+
+/* padding will still work even if position absolute,
+            bec you do the positioning to the whole div
+            and the padding is included on that div
+            so the whole div will move 
+        */
+
+@media (min-width: 800px) {
+
+  .large-hero__text-content {
+    padding-top: 60px;
+  }
 }
 
 .large-hero__title {
@@ -684,8 +698,8 @@ a {
             the left side of the screen
         5. add the clearfix: the idea is that instead of adding an empty
             div and then apply clear: both, the pseudo class ::after
-            was used (mimics as if we have an empty div thats why
-            content: "") and apply same settings
+            was used (mimics as if we have an empty div right after the
+			main row div thats why content: "") and apply same settings
         4. assign a class of --gutters if you want to add gap between the columns
             set padding (within the box) to the right, applicable to all 
             columns or both columns, and preserving the overall total of 100% 
@@ -1046,4 +1060,130 @@ Instead edit gulp/templates/sprite */
     margin-right: 1.4rem;
     margin-bottom: 0;
   }
+}
+
+.site-header {
+    position: absolute;
+    z-index: 2;
+    /* if z-index is not greater than the default z-index 
+        of its same-level next div element, this div will
+        be hidden from view bec the next div will take over
+        the occupied space once main div is positioned
+        absolute. need to have greater priority in order
+        to be on top and will be seen.
+    */
+    width: 100%;
+    /* if position is absolute, this div will shrink to its
+        smallest container as possible. you have to explicitly
+        define to make it occupy the 100% width of the container
+    */
+    padding: 10px 0;
+}
+
+@media (min-width: 800px) {
+
+  .site-header {
+    background-color: rgba(47,85,114, .3);/* bbm where is the bg color for small?? */
+  }
+}
+
+.site-header__logo {
+  position: absolute;
+  top: 0;
+  background-color: #2f5572;
+  padding: 25px 36px;/* since the positioning is absolute, make use of
+            transform property to position the mobile logo and
+            return to the original position for big screen
+        */
+  left: 50%;
+  -webkit-transform: translateX(-50%) scale(0.8);
+          transform: translateX(-50%) scale(0.8);
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
+}
+
+/* or top */
+
+@media (min-width: 800px) {
+
+  .site-header__logo {
+    left: auto;/* if you use 0 here, it will ignore any margin of the wrapper */
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+.site-header__logo__graphic {
+  text-indent: -9999px;
+}
+
+.site-header__menu-icon {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  position: absolute;/* set this to absolute, to make it as if not part of
+            the whole header then pos to top rightmost corner
+        */
+  top: 10px;
+  right: 10px;
+}
+
+@media (min-width: 800px) {
+
+  .site-header__menu-icon {
+    display: none;
+  }
+}
+
+.site-header__menu-content {/* float: right; note: nothing to float since its 2 elements floated by themselves *//* its only use now is to hide unhide the menu content with js */
+  display: none;
+}
+
+@media (min-width: 800px) {
+
+  .site-header__menu-content {
+    display: block;
+  }
+}
+
+.site-header__btn_container {
+  float: right;
+}
+
+.primary-nav--pull-right {
+  float: right;
+}
+
+.primary-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+.primary-nav ul::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.primary-nav li {
+  list-style: none;/* display: inline; 
+            if you put li as display inline, you 
+            cant put any padding on its a elements,
+            but li float and a block combi is 
+            possible so use it instead
+        */
+  float: left;/* once you use float here, add clear fix
+            on its parent (ul), so that it will
+            still have a place. in reality, each li
+            will occupy its original usurped place
+        */
+  padding-right: 20px;
+}
+
+.primary-nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 300;
+  display: block;
+  padding: 12px 0;
 } 

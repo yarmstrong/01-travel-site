@@ -13,6 +13,16 @@
         transform: translateY(-50%);
         width: 100%;
         text-align: center;
+        padding-top: 88px; 
+        /* padding will still work even if position absolute,
+            bec you do the positioning to the whole div
+            and the padding is included on that div
+            so the whole div will move 
+        */
+        
+        @mixin atMedium {
+            padding-top: 60px;
+        }
     }
     
     &__title {
