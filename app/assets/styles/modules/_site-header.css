@@ -14,6 +14,15 @@
         define to make it occupy the 100% width of the container
     */
     padding: 10px 0;
+    transition: background-color 0.3s ease-out;
+    
+    &--is-expanded {
+        background-color: rgba($mainBlue, 0.55);    
+        /* this is applicable only when the MobileMenu is toggled
+            so if you want tto put transition here, you need to define
+            the transition properties from the base element
+        */
+    }
     
     @mixin atMedium {
         background-color: rgba($mainBlue, .3); /* bbm where is the bg color for small?? */
@@ -53,6 +62,11 @@
         */
         top: 10px;
         right: 10px;
+        z-index: 2;
+        /* since __menu-content once visible has z-index of 1,
+            this menu-icon should still be clickable
+            so need to just up the z-index of this to 2
+        */
         
         @mixin atMedium {
             display: none;
@@ -60,16 +74,60 @@
     }
     
     &__menu-content {
-        /* float: right; note: nothing to float since its 2 elements floated by themselves */
-        /* its only use now is to hide unhide the menu content with js */
-        display: none;
+        /* float: right; note: nothing to float now since 
+            its 2 elements were all set to float, 
+            its only use now is to hide unhide 
+            the menu content with js
+        */
+        
+        /* in regards to animation of mobileMenu,
+            instead of using display: none, will use 
+            opacity 0 or 1
+          now if mobileMenu has opacity 0 (invisible),
+            need to set priority lowest among the element
+            so it wont be clickable if its invisible
+            and then clickable if visible; also set the 
+            position to relative bec z-index wont
+            work without it
+          also, in connection to the toggle bgcolor,
+            if display:none or block is used, its ease out 
+            transition is somehow lagging compared to the 
+            transtion of the menu content
+            
+          so from:
+            display: none; to display: block;
+          to:
+            opacity: 0; to opacity: 1;
+            z-index: -10; to z-indez: 1;
+            position: relative;
+            transform: scale(1.2); to transform: scale(1); --> zoom out/in
+            transition: all (opacity, z-index and transform) 0.3s ease-out;
+        */
+        opacity: 0;
+        transform: scale(1.2);
+        transition: all 0.3s ease-out;
+        position: relative;
+        z-index: -10;
+        padding-top: 90px;
+        text-align: center;
         
         @mixin atMedium {
-            display: block;
+            opacity: 1;
+            z-index: 1;
+            padding-top: 0;
+            transform: scale(1);
+        }
+        
+        &--is-visible {
+            opacity: 1;
+            z-index: 1;
+            transform: scale(1);
         }
     }
     
     &__btn_container {
-        float: right;
+        @mixin atMedium {
+            float: right;
+        }
     }
 }

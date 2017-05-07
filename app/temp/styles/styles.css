@@ -1078,6 +1078,14 @@ Instead edit gulp/templates/sprite */
         define to make it occupy the 100% width of the container
     */
     padding: 10px 0;
+    transition: background-color 0.3s ease-out;
+}
+
+.site-header--is-expanded {
+  background-color: rgba(47,85,114, 0.55);/* this is applicable only when the MobileMenu is toggled
+            so if you want tto put transition here, you need to define
+            the transition properties from the base element
+        */
 }
 
 @media (min-width: 800px) {
@@ -1126,7 +1134,13 @@ Instead edit gulp/templates/sprite */
         */
   top: 10px;
   right: 10px;
+  z-index: 2;
 }
+
+/* since __menu-content once visible has z-index of 1,
+            this menu-icon should still be clickable
+            so need to just up the z-index of this to 2
+        */
 
 @media (min-width: 800px) {
 
@@ -1135,23 +1149,84 @@ Instead edit gulp/templates/sprite */
   }
 }
 
-.site-header__menu-content {/* float: right; note: nothing to float since its 2 elements floated by themselves *//* its only use now is to hide unhide the menu content with js */
-  display: none;
+.site-header__menu-content {/* float: right; note: nothing to float now since 
+            its 2 elements were all set to float, 
+            its only use now is to hide unhide 
+            the menu content with js
+        *//* in regards to animation of mobileMenu,
+            instead of using display: none, will use 
+            opacity 0 or 1
+          now if mobileMenu has opacity 0 (invisible),
+            need to set priority lowest among the element
+            so it wont be clickable if its invisible
+            and then clickable if visible; also set the 
+            position to relative bec z-index wont
+            work without it
+          also, in connection to the toggle bgcolor,
+            if display:none or block is used, its ease out 
+            transition is somehow lagging compared to the 
+            transtion of the menu content
+            
+          so from:
+            display: none; to display: block;
+          to:
+            opacity: 0; to opacity: 1;
+            z-index: -10; to z-indez: 1;
+            position: relative;
+            transform: scale(1.2); to transform: scale(1); --> zoom out/in
+            transition: all (opacity, z-index and transform) 0.3s ease-out;
+        */
+  opacity: 0;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  transition: all 0.3s ease-out;
+  position: relative;
+  z-index: -10;
+  padding-top: 90px;
+  text-align: center;
 }
 
 @media (min-width: 800px) {
 
   .site-header__menu-content {
-    display: block;
+    opacity: 1;
+    z-index: 1;
+    padding-top: 0;
+    -webkit-transform: scale(1);
+            transform: scale(1);
   }
 }
 
-.site-header__btn_container {
-  float: right;
+.site-header__menu-content--is-visible {
+  opacity: 1;
+  z-index: 1;
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
-.primary-nav--pull-right {
-  float: right;
+@media (min-width: 800px) {
+
+  .site-header__btn_container {
+    float: right;
+  }
+}
+
+.primary-nav {
+    padding-top: 10px;
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav {
+    padding-top: 0;
+  }
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav--pull-right {
+    float: right;
+  }
 }
 
 .primary-nav ul {
@@ -1172,12 +1247,35 @@ Instead edit gulp/templates/sprite */
             but li float and a block combi is 
             possible so use it instead
         */
-  float: left;/* once you use float here, add clear fix
-            on its parent (ul), so that it will
-            still have a place. in reality, each li
-            will occupy its original usurped place
+  display: inline-block;/* this replace the float left for large screen,
+            and it will allow them to be horizontally 
+            centered (since parent div is centered) 
         */
-  padding-right: 20px;
+  padding-right: 7px;
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav li {
+    display: block;/* to reset display: inline-block; for mobile */
+    float: left;/* once you use float here, add clear fix
+                on its parent (ul), so that it will
+                still have a place. in reality, each li
+                will occupy its original usurped place
+            */
+    padding-right: 20px;
+  }
+}
+
+.primary-nav li:last-child {
+  padding-right: 0;
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav li:last-child {
+    padding-right: 20px;
+  }
 }
 
 .primary-nav a {
@@ -1185,5 +1283,16 @@ Instead edit gulp/templates/sprite */
   color: #fff;
   font-weight: 300;
   display: block;
-  padding: 12px 0;
+  padding: 5px 8px;
+  font-size: 0.8rem;
+  background-color: rgba(47,85,114, 0.5);
+}
+
+@media (min-width: 800px) {
+
+  .primary-nav a {
+    padding: 12px 0;
+    font-size: 1rem;
+    background-color: transparent;
+  }
 } 

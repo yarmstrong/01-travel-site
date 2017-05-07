@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -90,25 +90,6 @@ function Person(fullName, favColor) {
     }
 }
 */
-var Person = function () {
-    function Person(fullName, favColor) {
-        _classCallCheck(this, Person);
-
-        this.name = fullName;
-        this.favoriteColor = favColor;
-    }
-
-    _createClass(Person, [{
-        key: 'greet',
-        value: function greet() {
-            console.log('Hi there! ' + this.name + ' has a favorite color of ' + this.favoriteColor + '.');
-        }
-    }]);
-
-    return Person;
-}();
-
-exports.default = Person;
 
 /* module.exports = Person;
     what does this line of code do??
@@ -138,8 +119,81 @@ exports.default = Person;
     since babel is integrated
 */
 
+var $ = __webpack_require__(2);
+
+var MobileMenu = function () {
+    function MobileMenu() {
+        _classCallCheck(this, MobileMenu);
+
+        // this is created as soon as the object is created
+        this.siteHeader = $(".site-header");
+        this.menuIcon = $(".site-header__menu-icon");
+        this.menuContent = $(".site-header__menu-content");
+        this.events();
+    }
+
+    /* list all events you want to watch for
+        note that browser will not listen to any events
+        listed here as soon as the object is created 
+        unless you manually call it in the constructor() */
+
+
+    _createClass(MobileMenu, [{
+        key: "events",
+        value: function events() {
+
+            this.menuIcon.click(this.toggleTheMenu.bind(this));
+
+            /* we dont want the element that was clicked to be
+                sent to the called function, we want 'this' keyword 
+                to point back to our object so we can manipulate the DOM
+                ie. this(which is the object) --> this(.site-header__menu-icon) 
+                that's why we use ".bind(this)" where value of 'this' is the
+                main object */
+        }
+    }, {
+        key: "toggleTheMenu",
+        value: function toggleTheMenu() {
+            this.menuContent.toggleClass("site-header__menu-content--is-visible");
+            this.siteHeader.toggleClass("site-header--is-expanded");
+        }
+    }]);
+
+    return MobileMenu;
+}();
+
+exports.default = MobileMenu;
+
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _MobileMenu = __webpack_require__(0);
+
+var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mobileMenu = new _MobileMenu2.default(); /* this REQUIRE syntax is the same as what we have used with GULP
+                                                 however REQUIRE will not work within a web browser while it works
+                                                 in our GULP file bec GULP runs within the context of node.js.
+                                                 node.js supports the REQUIRE and IMPORT functionalities.
+                                                 Web browser has no idea what REQUIRE means so we need to leverage
+                                                 WEBPACK tool: it will look for REQUIRE and IMPORT and bundle them 
+                                                 all together in one JS file that will work in WEB BROWSER
+                                             */
+
+/* var Person = require('./modules/Person'); replaced by import Person from './modules/Person';
+    no need to use REQUIRE since we are now using babel, which allows us to use
+    es6 import and export functionalities
+
+*/
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10397,72 +10451,6 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _Person2 = __webpack_require__(0);
-
-var _Person3 = _interopRequireDefault(_Person2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-/* this REQUIRE syntax is the same as what we have used with GULP
-    however REQUIRE will not work within a web browser while it works
-    in our GULP file bec GULP runs within the context of node.js.
-    node.js supports the REQUIRE and IMPORT functionalities.
-    Web browser has no idea what REQUIRE means so we need to leverage
-    WEBPACK tool: it will look for REQUIRE and IMPORT and bundle them 
-    all together in one JS file that will work in WEB BROWSER
-*/
-
-var $ = __webpack_require__(1);
-
-/* var Person = require('./modules/Person'); replaced by import Person from './modules/Person';
-    no need to use REQUIRE since we are now using babel, which allows us to use
-    es6 import and export functionalities
-
-*/
-
-var Adult = function (_Person) {
-    _inherits(Adult, _Person);
-
-    function Adult() {
-        _classCallCheck(this, Adult);
-
-        return _possibleConstructorReturn(this, (Adult.__proto__ || Object.getPrototypeOf(Adult)).apply(this, arguments));
-    }
-
-    _createClass(Adult, [{
-        key: 'payTaxes',
-        value: function payTaxes() {
-            console.log(this.name + ' now owes $10.00 in taxes.');
-        }
-    }]);
-
-    return Adult;
-}(_Person3.default);
-
-var john = new _Person3.default('John Doe', 'blue');
-john.greet();
-
-var jane = new Adult('Jane Doe', 'pink');
-jane.greet();
-jane.payTaxes();
-
-$("h1").remove();
 
 /***/ })
 /******/ ]);

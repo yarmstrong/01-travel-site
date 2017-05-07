@@ -7,18 +7,6 @@ function Person(fullName, favColor) {
     }
 }
 */
-class Person {
-    constructor(fullName, favColor) {
-        this.name = fullName;
-        this.favoriteColor = favColor;
-    }
-    
-    greet() { 
-        console.log('Hi there! ' + this.name + ' has a favorite color of ' + this.favoriteColor + '.');
-    }
-}
-
-export default Person;
 
 /* module.exports = Person;
     what does this line of code do??
@@ -47,3 +35,50 @@ export default Person;
     we can now replace it with es6 import and export functionality 
     since babel is integrated
 */
+
+var $ = require('jquery');
+
+class MobileMenu {
+    
+    constructor() {
+        // this is created as soon as the object is created
+        this.siteHeader = $(".site-header");
+        this.menuIcon = $(".site-header__menu-icon");
+        this.menuContent = $(".site-header__menu-content");
+        this.events();
+    }
+    
+    /* list all events you want to watch for
+        note that browser will not listen to any events
+        listed here as soon as the object is created 
+        unless you manually call it in the constructor() */
+    events() {
+        
+        this.menuIcon.click(this.toggleTheMenu.bind(this));
+        
+        /* we dont want the element that was clicked to be
+            sent to the called function, we want 'this' keyword 
+            to point back to our object so we can manipulate the DOM
+            ie. this(which is the object) --> this(.site-header__menu-icon) 
+            that's why we use ".bind(this)" where value of 'this' is the
+            main object */
+    }
+    
+    toggleTheMenu() {
+        this.menuContent.toggleClass("site-header__menu-content--is-visible");
+        this.siteHeader.toggleClass("site-header--is-expanded");
+    }
+}
+
+export default MobileMenu;
+
+
+
+
+
+
+
+
+
+
+

@@ -7,25 +7,11 @@
     all together in one JS file that will work in WEB BROWSER
 */
 
-var $ = require('jquery');
-import Person from './modules/Person';
 /* var Person = require('./modules/Person'); replaced by import Person from './modules/Person';
     no need to use REQUIRE since we are now using babel, which allows us to use
     es6 import and export functionalities
 
 */
+import MobileMenu from './modules/MobileMenu';
 
-class Adult extends Person {
-    payTaxes() {
-        console.log(this.name + ' now owes $10.00 in taxes.');
-    }
-}
-
-var john = new Person('John Doe', 'blue');
-john.greet();
-
-var jane = new Adult('Jane Doe', 'pink');
-jane.greet();
-jane.payTaxes();
-
-$("h1").remove();
+var mobileMenu = new MobileMenu();

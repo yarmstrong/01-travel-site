@@ -1,7 +1,14 @@
 .primary-nav {
+    padding-top: 10px;;
+    
+    @mixin atMedium {
+        padding-top: 0;
+    }
     
     &--pull-right {
-        float: right;
+        @mixin atMedium {
+            float: right;
+        }
     }
     
     ul {
@@ -18,13 +25,32 @@
             but li float and a block combi is 
             possible so use it instead
         */
-        float: left;
-        /* once you use float here, add clear fix
-            on its parent (ul), so that it will
-            still have a place. in reality, each li
-            will occupy its original usurped place
+        display: inline-block;
+        /* this replace the float left for large screen,
+            and it will allow them to be horizontally 
+            centered (since parent div is centered) 
         */
-        padding-right: 20px;
+        padding-right: 7px;
+        
+        @mixin atMedium {
+            display: block;
+            /* to reset display: inline-block; for mobile */
+            float: left;
+            /* once you use float here, add clear fix
+                on its parent (ul), so that it will
+                still have a place. in reality, each li
+                will occupy its original usurped place
+            */
+            padding-right: 20px;
+        }
+    }
+    
+    li:last-child {
+        padding-right: 0;
+        
+        @mixin atMedium {
+            padding-right: 20px;
+        }
     }
     
     a {
@@ -32,6 +58,14 @@
         color: #fff;
         font-weight: 300;
         display: block;
-        padding: 12px 0;
+        padding: 5px 8px;
+        font-size: 0.8rem;
+        background-color: rgba($mainBlue, 0.5);
+        
+        @mixin atMedium {
+            padding: 12px 0;
+            font-size: 1rem;
+            background-color: transparent;
+        }
     }
 }
