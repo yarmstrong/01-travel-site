@@ -1,0 +1,10 @@
+.reveal-item {
+    opacity: 0;
+    /* opacity is used, bec if display: none,
+        the features container will sink */
+    transition: opacity 1.5s ease-out;
+    
+    &--is-visible {
+        opacity: 1;
+    }
+}
