@@ -42,7 +42,9 @@ class RevealOnScroll {
             var currentItem = this;
             
             new Waypoint({
-                element: currentItem,
+                element: currentItem, 
+                /* this is the trigger element or the element 
+                    being watched */
                 handler: function() {
                     $(currentItem).addClass('reveal-item--is-visible');
                 },

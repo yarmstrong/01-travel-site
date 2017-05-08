@@ -1091,7 +1091,12 @@ Instead edit gulp/templates/sprite */
 @media (min-width: 800px) {
 
   .site-header {
-    background-color: rgba(47,85,114, .3);/* bbm where is the bg color for small?? */
+    background-color: rgba(47,85,114, .3);/* where is the bg color for small?? it is added above *//* for the sticky header */
+    position: fixed;/* for the sticky header - end */
+  }
+
+  .site-header--dark {
+    background-color: rgba(23, 51, 72, 0.85);
   }
 }
 
@@ -1107,17 +1112,23 @@ Instead edit gulp/templates/sprite */
   -webkit-transform: translateX(-50%) scale(0.8);
           transform: translateX(-50%) scale(0.8);
   -webkit-transform-origin: 50% 0;
-          transform-origin: 50% 0;
+          transform-origin: 50% 0;/* or top */
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
 }
-
-/* or top */
 
 @media (min-width: 800px) {
 
   .site-header__logo {
     left: auto;/* if you use 0 here, it will ignore any margin of the wrapper */
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+            transform: translateX(0);/* for the sticky header *//* for the sticky header - end */
+  }
+
+  .site-header--dark .site-header__logo {/* equivalent to: .site-header--dark .site-header__logo */
+    -webkit-transform: scale(.565);
+            transform: scale(.565);
   }
 }
 
@@ -1356,6 +1367,10 @@ Instead edit gulp/templates/sprite */
     padding: 12px 0;
     font-size: 1rem;
     background-color: transparent;
+  }
+
+  .primary-nav a.is-current-link {/* .primary-nav a.is-current-link { */
+    color: #fabb69;
   }
 }
 

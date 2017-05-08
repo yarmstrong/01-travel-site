@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10328,232 +10328,6 @@ return jQuery;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-/* normal way to define Object vs the es6 code since we are now using babel
-function Person(fullName, favColor) {
-    this.name = fullName;
-    this.favoriteColor = favColor;
-    this.greet = function() {
-        console.log(this.name + ' has a favorite color of ' + this.favoriteColor + '.');
-    }
-}
-*/
-
-/* module.exports = Person;
-    what does this line of code do??
-    if simple console logging is added here, this logging will take effect
-    meaning that the export works. however, what module.exports does is to
-    export or expose certain part of the Person.js file and make those part
-    accessible or callable from within the main App.js 
-    
-    if we dont do this line of code, the exported Object in the REQUIRE from
-    the main App.js is just an empty Object (an empty exports Object)
-    
-    if we want to put an object into it, we try to set things as follows
-    (exposing multiple things instead of 1 simple constructor function):
-    
-    exports.exampleProperty = "Some value";
-    exports.exampleFunction = function() {
-        alert('this is an example');
-    };
-    
-    and this will now be the Object exported into main App.js
-*/
-
-/* module.exports = Person; replaced by export default Person;
-    why is it replaced?
-    instead of using the REQUIRE functionality of node.js / gulp, 
-    we can now replace it with es6 import and export functionality 
-    since babel is integrated
-*/
-
-var $ = __webpack_require__(0);
-
-var MobileMenu = function () {
-    function MobileMenu() {
-        _classCallCheck(this, MobileMenu);
-
-        // this is created as soon as the object is created
-        this.siteHeader = $(".site-header");
-        this.menuIcon = $(".site-header__menu-icon");
-        this.menuContent = $(".site-header__menu-content");
-        this.events();
-    }
-
-    /* list all events you want to watch for
-        note that browser will not listen to any events
-        listed here as soon as the object is created 
-        unless you manually call it in the constructor() */
-
-
-    _createClass(MobileMenu, [{
-        key: "events",
-        value: function events() {
-
-            this.menuIcon.click(this.toggleTheMenu.bind(this));
-
-            /* we dont want the element that was clicked to be
-                sent to the called function, we want 'this' keyword 
-                to point back to our object so we can manipulate the DOM
-                ie. this(which is the object) --> this(.site-header__menu-icon) 
-                that's why we use ".bind(this)" where value of 'this' is the
-                main object */
-        }
-    }, {
-        key: "toggleTheMenu",
-        value: function toggleTheMenu() {
-            this.menuContent.toggleClass("site-header__menu-content--is-visible");
-            this.siteHeader.toggleClass("site-header--is-expanded");
-            this.menuIcon.toggleClass("site-header__menu-icon--close-x");
-        }
-    }]);
-
-    return MobileMenu;
-}();
-
-exports.default = MobileMenu;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _noframework = __webpack_require__(4);
-
-var _noframework2 = _interopRequireDefault(_noframework);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var RevealOnScroll = function () {
-    function RevealOnScroll(els, offset) {
-        _classCallCheck(this, RevealOnScroll);
-
-        this.itemsToReveal = (0, _jquery2.default)(els);
-        this.offsetPercentage = offset;
-        this.hideInitially();
-        this.createWaypoints();
-    }
-
-    _createClass(RevealOnScroll, [{
-        key: 'hideInitially',
-        value: function hideInitially() {
-            this.itemsToReveal.addClass('reveal-item');
-            /* create a new css file for this class since 
-                we want this to be re-usable as an object
-                applicable for any element */
-        }
-    }, {
-        key: 'createWaypoints',
-        value: function createWaypoints() {
-
-            /* note: the reason we dont use bind() here is
-                bec we did not try click() event that 
-                changes the value of 'this' */
-
-            var that = this;
-            /* save first the current 'this' value to another 
-                var to preserve it since 'this' value will 
-                changed once Waypoint object is created */
-
-            this.itemsToReveal.each(function () {
-
-                /* create a Waypoint object in order to use it
-                    BUT for each loop here, save first the current 
-                    'this' value to another var to preserve
-                    it since 'this' value will changed once 
-                    Waypoint object is created 
-                    
-                    the for loop value is different from the
-                    var that = this; above
-                */
-
-                var currentItem = this;
-
-                new Waypoint({
-                    element: currentItem,
-                    handler: function handler() {
-                        (0, _jquery2.default)(currentItem).addClass('reveal-item--is-visible');
-                    },
-                    offset: that.offsetPercentage
-                    /* 0%: once the element reached 0% or top of the 
-                        window it will then trigger the callback function 
-                       100%: once the elements passes the 100% or 
-                        bottom of the window
-                       */
-                });
-            });
-        }
-    }]);
-
-    return RevealOnScroll;
-}();
-
-exports.default = RevealOnScroll;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _MobileMenu = __webpack_require__(1);
-
-var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
-
-var _RevealOnScroll = __webpack_require__(2);
-
-var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* this REQUIRE syntax is the same as what we have used with GULP
-    however REQUIRE will not work within a web browser while it works
-    in our GULP file bec GULP runs within the context of node.js.
-    node.js supports the REQUIRE and IMPORT functionalities.
-    Web browser has no idea what REQUIRE means so we need to leverage
-    WEBPACK tool: it will look for REQUIRE and IMPORT and bundle them 
-    all together in one JS file that will work in WEB BROWSER
-*/
-
-/* var Person = require('./modules/Person'); replaced by import Person from './modules/Person';
-    no need to use REQUIRE since we are now using babel, which allows us to use
-    es6 import and export functionalities
-
-*/
-var mobileMenu = new _MobileMenu2.default();
-
-new _RevealOnScroll2.default('.feature-item', '85%');
-new _RevealOnScroll2.default('.testimonial', '65%');
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports) {
 
 /*!
@@ -11314,6 +11088,365 @@ https://github.com/imakewebthings/waypoints/blob/master/licenses.txt
   Waypoint.Adapter = NoFrameworkAdapter
 }())
 ;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/* normal way to define Object vs the es6 code since we are now using babel
+function Person(fullName, favColor) {
+    this.name = fullName;
+    this.favoriteColor = favColor;
+    this.greet = function() {
+        console.log(this.name + ' has a favorite color of ' + this.favoriteColor + '.');
+    }
+}
+*/
+
+/* module.exports = Person;
+    what does this line of code do??
+    if simple console logging is added here, this logging will take effect
+    meaning that the export works. however, what module.exports does is to
+    export or expose certain part of the Person.js file and make those part
+    accessible or callable from within the main App.js 
+    
+    if we dont do this line of code, the exported Object in the REQUIRE from
+    the main App.js is just an empty Object (an empty exports Object)
+    
+    if we want to put an object into it, we try to set things as follows
+    (exposing multiple things instead of 1 simple constructor function):
+    
+    exports.exampleProperty = "Some value";
+    exports.exampleFunction = function() {
+        alert('this is an example');
+    };
+    
+    and this will now be the Object exported into main App.js
+*/
+
+/* module.exports = Person; replaced by export default Person;
+    why is it replaced?
+    instead of using the REQUIRE functionality of node.js / gulp, 
+    we can now replace it with es6 import and export functionality 
+    since babel is integrated
+*/
+
+var $ = __webpack_require__(0);
+
+var MobileMenu = function () {
+    function MobileMenu() {
+        _classCallCheck(this, MobileMenu);
+
+        // this is created as soon as the object is created
+        this.siteHeader = $(".site-header");
+        this.menuIcon = $(".site-header__menu-icon");
+        this.menuContent = $(".site-header__menu-content");
+        this.events();
+    }
+
+    /* list all events you want to watch for
+        note that browser will not listen to any events
+        listed here as soon as the object is created 
+        unless you manually call it in the constructor() */
+
+
+    _createClass(MobileMenu, [{
+        key: "events",
+        value: function events() {
+
+            this.menuIcon.click(this.toggleTheMenu.bind(this));
+
+            /* we dont want the element that was clicked to be
+                sent to the called function, we want 'this' keyword 
+                to point back to our object so we can manipulate the DOM
+                ie. this(which is the object) --> this(.site-header__menu-icon) 
+                that's why we use ".bind(this)" where value of 'this' is the
+                main object */
+        }
+    }, {
+        key: "toggleTheMenu",
+        value: function toggleTheMenu() {
+            this.menuContent.toggleClass("site-header__menu-content--is-visible");
+            this.siteHeader.toggleClass("site-header--is-expanded");
+            this.menuIcon.toggleClass("site-header__menu-icon--close-x");
+        }
+    }]);
+
+    return MobileMenu;
+}();
+
+exports.default = MobileMenu;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _noframework = __webpack_require__(1);
+
+var _noframework2 = _interopRequireDefault(_noframework);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var RevealOnScroll = function () {
+    function RevealOnScroll(els, offset) {
+        _classCallCheck(this, RevealOnScroll);
+
+        this.itemsToReveal = (0, _jquery2.default)(els);
+        this.offsetPercentage = offset;
+        this.hideInitially();
+        this.createWaypoints();
+    }
+
+    _createClass(RevealOnScroll, [{
+        key: 'hideInitially',
+        value: function hideInitially() {
+            this.itemsToReveal.addClass('reveal-item');
+            /* create a new css file for this class since 
+                we want this to be re-usable as an object
+                applicable for any element */
+        }
+    }, {
+        key: 'createWaypoints',
+        value: function createWaypoints() {
+
+            /* note: the reason we dont use bind() here is
+                bec we did not try click() event that 
+                changes the value of 'this' */
+
+            var that = this;
+            /* save first the current 'this' value to another 
+                var to preserve it since 'this' value will 
+                changed once Waypoint object is created */
+
+            this.itemsToReveal.each(function () {
+
+                /* create a Waypoint object in order to use it
+                    BUT for each loop here, save first the current 
+                    'this' value to another var to preserve
+                    it since 'this' value will changed once 
+                    Waypoint object is created 
+                    
+                    the for loop value is different from the
+                    var that = this; above
+                */
+
+                var currentItem = this;
+
+                new Waypoint({
+                    element: currentItem,
+                    /* this is the trigger element or the element 
+                        being watched */
+                    handler: function handler() {
+                        (0, _jquery2.default)(currentItem).addClass('reveal-item--is-visible');
+                    },
+                    offset: that.offsetPercentage
+                    /* 0%: once the element reached 0% or top of the 
+                        window it will then trigger the callback function 
+                       100%: once the elements passes the 100% or 
+                        bottom of the window
+                       */
+                });
+            });
+        }
+    }]);
+
+    return RevealOnScroll;
+}();
+
+exports.default = RevealOnScroll;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _noframework = __webpack_require__(1);
+
+var _noframework2 = _interopRequireDefault(_noframework);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var StickyHeader = function () {
+    function StickyHeader() {
+        _classCallCheck(this, StickyHeader);
+
+        this.siteHeader = (0, _jquery2.default)('.site-header');
+        this.headerTriggerElement = (0, _jquery2.default)('.large-hero__title'); /* this jquery will return a Jquery object and not the JS native DOM element */
+        this.createHeaderWaypoint();
+        this.pageSections = (0, _jquery2.default)('.page-section');
+        this.headerLinks = (0, _jquery2.default)('.primary-nav a');
+        this.createPageSectionWaypoint();
+    }
+
+    _createClass(StickyHeader, [{
+        key: 'createHeaderWaypoint',
+        value: function createHeaderWaypoint() {
+            var that = this;
+            new Waypoint({
+                element: that.headerTriggerElement[0],
+                /* element: this.headerTriggerElement wrong
+                    since should use JS native DOM element,
+                    and Object[0] is the JS native DOM */
+                /* note: 'this' keyword is still preserved here
+                    compared when handler function is triggered
+                    i think. bec same result for using 
+                    that.headerTriggerElement[0] vs
+                    this.headerTriggerElement[0] */
+                /* once this element reached top of the screen
+                    where our site-header is, then do something */
+                handler: function handler(direction) {
+                    if (direction == "down") {
+                        that.siteHeader.addClass('site-header--dark');
+                        /* 'this' keyword is no longer preserved here i think
+                            bec it is no longer understood by browser */
+                    } else {
+                        that.siteHeader.removeClass('site-header--dark');
+                    }
+                }
+            });
+        }
+    }, {
+        key: 'createPageSectionWaypoint',
+        value: function createPageSectionWaypoint() {
+            var that = this;
+            this.pageSections.each(function () {
+                var currentPageSection = this;
+
+                /* to watch for downward direction */
+                new Waypoint({
+                    element: currentPageSection,
+                    handler: function handler(direction) {
+                        /* once you reached a page section, you will target 
+                            its custom attributes which points to the id
+                            you set on the nav links. once you acesss this
+                            link, you can now modify its css style via 
+                            addition of class */
+
+                        /* this is the DOM html div for currentPageSection
+                            console.log('currentPageSection');
+                            console.log(currentPageSection); 
+                            <div id="our-beginning" class="page-section" data-matching-link="#our-beginning-link"> */
+
+                        /* this is the currentPageSection array object??
+                            console.log('$currentPageSection');
+                            console.log($(currentPageSection)); 
+                            [div#our-beginning.page-section] */
+
+                        if (direction == "down") {
+                            /* either js or jquery way will work 
+                            var marchingHeaderLink = currentPageSection.getAttribute("data-matching-link"); */
+                            var marchingHeaderLink = (0, _jquery2.default)(currentPageSection).attr("data-matching-link");
+
+                            /* reset class of is-current-link before setting a new one */
+                            that.headerLinks.removeClass("is-current-link");
+                            (0, _jquery2.default)(marchingHeaderLink).addClass("is-current-link");
+                        }
+                    },
+                    offset: "18%"
+                });
+
+                /* to watch for upward direction */
+                new Waypoint({
+                    element: currentPageSection,
+                    handler: function handler(direction) {
+                        if (direction == "up") {
+                            var marchingHeaderLink = (0, _jquery2.default)(currentPageSection).attr("data-matching-link");
+                            that.headerLinks.removeClass("is-current-link");
+                            (0, _jquery2.default)(marchingHeaderLink).addClass("is-current-link");
+                        }
+                    },
+                    offset: "-50%" /* uses (-) for upward */
+                });
+            });
+        }
+    }]);
+
+    return StickyHeader;
+}();
+
+exports.default = StickyHeader;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _MobileMenu = __webpack_require__(2);
+
+var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
+
+var _RevealOnScroll = __webpack_require__(3);
+
+var _RevealOnScroll2 = _interopRequireDefault(_RevealOnScroll);
+
+var _StickyHeader = __webpack_require__(4);
+
+var _StickyHeader2 = _interopRequireDefault(_StickyHeader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mobileMenu = new _MobileMenu2.default(); /* this REQUIRE syntax is the same as what we have used with GULP
+                                                 however REQUIRE will not work within a web browser while it works
+                                                 in our GULP file bec GULP runs within the context of node.js.
+                                                 node.js supports the REQUIRE and IMPORT functionalities.
+                                                 Web browser has no idea what REQUIRE means so we need to leverage
+                                                 WEBPACK tool: it will look for REQUIRE and IMPORT and bundle them 
+                                                 all together in one JS file that will work in WEB BROWSER
+                                             */
+
+/* var Person = require('./modules/Person'); replaced by import Person from './modules/Person';
+    no need to use REQUIRE since we are now using babel, which allows us to use
+    es6 import and export functionalities
+
+*/
+
+
+new _RevealOnScroll2.default('.feature-item', '85%');
+new _RevealOnScroll2.default('.testimonial', '65%');
+
+var stickyHeader = new _StickyHeader2.default();
 
 /***/ })
 /******/ ]);

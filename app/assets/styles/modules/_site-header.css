@@ -25,7 +25,14 @@
     }
     
     @mixin atMedium {
-        background-color: rgba($mainBlue, .3); /* bbm where is the bg color for small?? */
+        background-color: rgba($mainBlue, .3); /* where is the bg color for small?? it is added above */
+        /* for the sticky header */
+        position: fixed;
+        
+        &--dark {
+            background-color: rgba(23, 51, 72, 0.85);
+        }
+        /* for the sticky header - end */
     }
     
     &__logo {
@@ -39,12 +46,20 @@
         */
         left: 50%;
         transform: translateX(-50%) scale(0.8);
-        transform-origin: 50% 0; /* or top */        
+        transform-origin: 50% 0; /* or top */  
+        transition: transform 0.3s ease-out;
         
         @mixin atMedium {
             left: auto; 
             /* if you use 0 here, it will ignore any margin of the wrapper */
             transform: translateX(0);
+            
+            /* for the sticky header */
+            .site-header--dark & {
+                /* equivalent to: .site-header--dark .site-header__logo */
+                transform: scale(.565);
+            }
+            /* for the sticky header - end */
         }
     }
     
