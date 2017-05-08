@@ -1128,7 +1128,6 @@ Instead edit gulp/templates/sprite */
 .site-header__menu-icon {
   width: 20px;
   height: 20px;
-  background-color: #fff;
   position: absolute;/* set this to absolute, to make it as if not part of
             the whole header then pos to top rightmost corner
         */
@@ -1142,11 +1141,74 @@ Instead edit gulp/templates/sprite */
             so need to just up the z-index of this to 2
         */
 
+.site-header__menu-icon::before {/* .site-header__menu-icon::before
+                the parent where youre intending to
+                insert a ::before (first element)
+                is this parent div and not the middle bar
+                middle bar is just part of the parent div
+            */
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 20px;
+  transition: all 0.3s ease-out;
+}
+
+.site-header__menu-icon::after {/* .site-header__menu-icon::after */
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 20px;
+  transition: all 0.3s ease-out;
+}
+
+.site-header__menu-icon__middle {
+  position: relative;
+  background-color: #fff;
+  top: 8.5px;
+  height: 3px;
+  transition: all 0.3s ease-out;
+}
+
 @media (min-width: 800px) {
 
   .site-header__menu-icon {
     display: none;
   }
+}
+
+/* you cant put this inside the &__menu-icon above
+            bec there's no way you'll be able to manipulate
+            its child elements, you have to manually call
+            the middle bar with its full name since 
+            it does not use this 
+        */
+
+.site-header__menu-icon--close-x::before {
+  -webkit-transform: rotate(45deg) scaleX(1.25);
+          transform: rotate(45deg) scaleX(1.25);
+  -webkit-transform-origin: 1px 3px;
+          transform-origin: 1px 3px;
+}
+
+.site-header__menu-icon--close-x::after {
+  -webkit-transform: rotate(-45deg) scaleX(1.25);
+          transform: rotate(-45deg) scaleX(1.25);
+  -webkit-transform-origin: 1px 0;
+          transform-origin: 1px 0;
+}
+
+.site-header__menu-icon--close-x .site-header__menu-icon__middle {
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+          transform-origin: 0 50%;
 }
 
 .site-header__menu-content {/* float: right; note: nothing to float now since 
